@@ -1,0 +1,6 @@
+{
+    "example": true,
+    "http": {
+      "address": ":8081"
+    }
+}

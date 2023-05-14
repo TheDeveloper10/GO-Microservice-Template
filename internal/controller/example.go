@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"msvc-template/internal/dto"
 	"msvc-template/internal/service"
 	"msvc-template/internal/util"
 
@@ -12,6 +13,18 @@ type Example struct {
 }
 
 func (ctrl *Example) Handler(c *fiber.Ctx) error {
+	id := dto.ID{}
+	if err := id.Fill(c); err != nil {
+		return err
+	}
+
+	body := dto.Body{}
+	if err := c.BodyParser(&body); err != nil {
+		return err
+	} else if err := body.Validate(); err != nil {
+		return err
+	}
+
 	status := ctrl.svc.Func()
 
 	if status == util.StatusSuccess {
